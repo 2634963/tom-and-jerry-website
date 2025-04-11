@@ -21,7 +21,7 @@ document.getElementById("navbar").innerHTML = `
       </form>
       
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Drop" aria-controls="Drop" aria-expanded="false" aria-label="Toggle navigation">
-	<i class="fa fa-bars" aria-hidden="true"></i>
+	<i class="bi bi-list"></i>
       </button>
     </div>
 
