@@ -61,6 +61,9 @@ document.getElementById("navbar").innerHTML = `
 	<li class="nav-item">
 	  <a class="nav-link" href="./References.html">References</a>
 	</li>
+  <li class="nav-item">
+    <a class="nav-link" href="./Theatrical-Shorts.html">Theatrical Shorts</a>
+  </li>
       </ul>
     </div>
   </div>	
