@@ -1,0 +1,14 @@
+/* Allow positioning of the footer at the bottom of the page, even if there is not enough content */
+body
+{
+	margin: 0;
+	display: flex;
+	min-height: 100vh; /* 100% of viewport height */
+	flex-direction: column;
+}
+
+main
+{
+	display: block;
+	flex: 1 0 auto; /* flex-grow: 1, flex-shrink: 0, flex-basis: auto */
+}
