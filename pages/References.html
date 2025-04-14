@@ -9,7 +9,7 @@
     <!-- Our own CSS -->
     <link rel="stylesheet" href="../styles/main.css">
     
-    <title>Tom and Jerry</title>
+    <title>References/Attribution</title>
   </head>
 
   <body>
@@ -18,10 +18,33 @@
     <script src="../scripts/Navbar.js"></script>
 
     <main>
-      <!-- Main content goes in here -->
-      Hello, world!
+      <div class="container-fluid text-center pt-5 mt-5">
+        <h1 class="fw-medium border-bottom border-3 pb-3">References/Attribution</h1>
+      </div>
+
+      <!-- Accordion for attribution for different aspects of website -->
+      <div class="accordion mb-4 pb-0" id="accordion">
+
+	<!-- References for text/info -->
+	<div class="accordion-item shadow">
+
+	  <!-- Button to toggle text/info references -->
+          <h2 class="accordion-header text-center">
+            <button class="accordion-button collapsed bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#text-info">
+              <i class="bi bi-blockquote-left"></i>Text & Information References
+            </button>
+          </h2>
+
+	  <!-- References for text/info -->
+	  <div id="text-info" class="accordion-collapse collapse" data-bs-parent="#accordion">
+            <div class="accordion-body bg-info">
+	      <p>Hi!</p>
+            </div>
+          </div>
+	</div>
+      </div>
     </main>
-      
+    
     <!-- Embed footer into the page -->
     <span id="footer"></span>
     <script src="../scripts/Footer.js"></script>
