@@ -41,29 +41,14 @@ document.getElementById("navbar").innerHTML = `
 	  <a class="nav-link" href="./Cultural-Influences.html">Cultural Influences</a>
 	</li>
 	<li class="nav-item">
-	<a class="nav-link" href="./Feature-Films.html">Feature Films</a>
-	</li>
-	<li class="nav-item">
 	  <a class="nav-link" href="./History.html">History</a>
 	</li>
 	<li class="nav-item">
 	  <a class="nav-link" href="./Home-Media.html">Media</a> <!-- not sure if this is the correct page -->
 	</li>
 	<li class="nav-item">
-	  <a class="nav-link" href="./In-Other-Media.html">In Other Media</a>
-	</li>
-	<li class="nav-item">
-	  <a class="nav-link" href="./Outside-the-United-States.html">Outside the United States</a>
-	</li>
-	<li class="nav-item">
-	  <a class="nav-link" href="./Television.html">Television</a>
-	</li>
-	<li class="nav-item">
 	  <a class="nav-link" href="./References.html">References</a>
 	</li>
-  <li class="nav-item">
-    <a class="nav-link" href="./Theatrical-Shorts.html">Theatrical Shorts</a>
-  </li>
       </ul>
     </div>
   </div>	
