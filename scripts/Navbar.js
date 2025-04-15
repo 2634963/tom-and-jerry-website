@@ -8,7 +8,7 @@ document.getElementById("navbar").innerHTML = `
   <div class="container-fluid">
     
     <a class="navbar-brand col">
-      <img src="../images/Untitled.png" class="rounded-pill" alt="The logo of Tom & Jerry" width="100" height="50">
+      <img src="../images/Untitled.png" class="rounded-pill img-fluid" alt="The logo of Tom & Jerry" width="100" height="50">
     </a>
 
     <!-- The search bar for searching for the character
