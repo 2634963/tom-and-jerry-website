@@ -93,11 +93,37 @@ function search()
     }
 
     // Loop through the entire body HTML, looking for matches and handling any we find
+    mainLoop:
     for(let i = 0; i + searchString.length < htmlString.length; i++)
     {
 	if(htmlString.slice(i, i + searchString.length).toLowerCase() == searchString)
 	{
 	    // We found a match for the search, now make sure it's not inside a tag
+	    for(let j = i; j < htmlString.length; j++)
+	    {
+		if(htmlString[j] == '>')
+		{
+		    // We're inside a tag. Ignore the current match.
+		    continue mainLoop;
+		}
+		else if(htmlString[j] == '<')
+		{
+		    // We're outside of a tag, all good to proceed.
+		    break;
+		}
+	    }
+
+	    // We're not inside a tag, now wrap the current match in <mark>...</mark>
+	    htmlString = htmlString.slice(0, i)
+		+ "<mark>"
+		+ htmlString.slice(i, i + searchString.length)
+		+ "</mark>"
+		+ ((i + searchString.length + 1 == htmlString.length) // If match is at end of string
+		   ? "" // True, don't try to add anything to the end or we'll overrun the string
+		   : (htmlString.slice(i + searchString.length, htmlString.length))); // False, add remaining content
+
+	    // Update current index
+	    i += "<mark></mark>".length + searchString.length;
 	}
     }
 
