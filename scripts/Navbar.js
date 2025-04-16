@@ -58,11 +58,8 @@ document.getElementById("navbar").innerHTML = `
 function search()
 {
     // Retrieve the search string and convert to lowercase, escaping quotes
-    let searchString = document.getElementById("searchbar").value
-	.toLowerCase()
-	.replace(/"/g, "&quot;")
-	.replace(/'/g, "&apos;");
-
+    let searchString = document.getElementById("searchbar").value.toLowerCase();
+    
     // Get HTML representations of special characters.
     // We can do a bit of a hack here to save a lot of effort, and make the browser do it for us.
     // If we load the search string into innerText of an element, then read it back as innerHTML,
@@ -71,12 +68,6 @@ function search()
     converter.innerText = converter.textContent = searchString;
     searchString = converter.innerHTML;
     converter.remove();
-
-    // The previous step screws with our already converted quotes, fix them here.
-    // (We can't just not escape them before that step or it could wreak havoc on the page).
-    searchString = searchString
-	.replace(/&amp;quot;/g, "&quot;")
-	.replace(/&amp;apos;/g, "&apos;");
 
     // Load in the inner HTML elements of the body
     let bodyHTML = document.querySelector("body");
