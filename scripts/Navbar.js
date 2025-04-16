@@ -15,10 +15,10 @@ document.getElementById("navbar").innerHTML = `
 	 In theory this should allow the user to search for a charcter and show that character -->
     
     <div class="d-flex align-items-center gap-2">
-      <form class="d-flex" role="search">
-	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	<button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="d-flex">
+	<input class="form-control me-2" id="searchbar" type="search" placeholder="Search" aria-label="Search">
+	<button class="btn btn-outline-success" onclick="search()">Search</button>
+      </div>
       
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Drop" aria-controls="Drop" aria-expanded="false" aria-label="Toggle navigation">
 	<i class="bi bi-list"></i>
@@ -53,3 +53,71 @@ document.getElementById("navbar").innerHTML = `
     </div>
   </div>	
 </nav>`;
+
+// Search bar code
+function search()
+{
+    // Retrieve the search string and convert to lowercase, escaping quotes
+    let searchString = document.getElementById("searchbar").value.toLowerCase();
+    
+    // Get HTML representations of special characters.
+    // We can do a bit of a hack here to save a lot of effort, and make the browser do it for us.
+    // If we load the search string into innerText of an element, then read it back as innerHTML,
+    // we get the HTML representations.
+    let converter = document.createElement("div");
+    converter.innerText = converter.textContent = searchString;
+    searchString = converter.innerHTML;
+    converter.remove();
+
+    // Load in the inner HTML elements of the body
+    let bodyHTML = document.querySelector("body");
+    let htmlString = bodyHTML.innerHTML;
+
+    // Delete any instances of <mark>...</mark> (clear the previous search)
+    htmlString = htmlString.replace(/<mark>/g, "").replace(/<\/mark>/g, "");
+
+    // If search string is empty, finish here
+    if(searchString.length == 0)
+    {
+	bodyHTML.innerHTML = htmlString;
+	return;
+    }
+
+    // Loop through the entire body HTML, looking for matches and handling any we find
+    mainLoop:
+    for(let i = 0; i + searchString.length < htmlString.length; i++)
+    {
+	if(htmlString.slice(i, i + searchString.length).toLowerCase() == searchString)
+	{
+	    // We found a match for the search, now make sure it's not inside a tag
+	    for(let j = i; j < htmlString.length; j++)
+	    {
+		if(htmlString[j] == '>')
+		{
+		    // We're inside a tag. Ignore the current match.
+		    continue mainLoop;
+		}
+		else if(htmlString[j] == '<')
+		{
+		    // We're outside of a tag, all good to proceed.
+		    break;
+		}
+	    }
+
+	    // We're not inside a tag, now wrap the current match in <mark>...</mark>
+	    htmlString = htmlString.slice(0, i)
+		+ "<mark>"
+		+ htmlString.slice(i, i + searchString.length)
+		+ "</mark>"
+		+ ((i + searchString.length + 1 == htmlString.length) // If match is at end of string
+		   ? "" // True, don't try to add anything to the end or we'll overrun the string
+		   : (htmlString.slice(i + searchString.length, htmlString.length))); // False, add remaining content
+
+	    // Update current index
+	    i += "<mark></mark>".length + searchString.length - 1;
+	}
+    }
+
+    bodyHTML.innerHTML = htmlString;
+    return;
+}
