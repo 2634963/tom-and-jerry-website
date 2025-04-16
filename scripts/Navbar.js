@@ -114,7 +114,7 @@ function search()
 		   : (htmlString.slice(i + searchString.length, htmlString.length))); // False, add remaining content
 
 	    // Update current index
-	    i += "<mark></mark>".length + searchString.length;
+	    i += "<mark></mark>".length + searchString.length - 1;
 	}
     }
 
