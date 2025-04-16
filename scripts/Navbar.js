@@ -15,10 +15,10 @@ document.getElementById("navbar").innerHTML = `
 	 In theory this should allow the user to search for a charcter and show that character -->
     
     <div class="d-flex align-items-center gap-2">
-      <form class="d-flex" role="search">
-	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	<button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="d-flex">
+	<input class="form-control me-2" id="searchbar" type="search" placeholder="Search" aria-label="Search">
+	<button class="btn btn-outline-success" onclick="search()">Search</button>
+      </div>
       
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Drop" aria-controls="Drop" aria-expanded="false" aria-label="Toggle navigation">
 	<i class="bi bi-list"></i>
@@ -53,3 +53,31 @@ document.getElementById("navbar").innerHTML = `
     </div>
   </div>	
 </nav>`;
+
+// Search bar code
+function search()
+{
+    // Retrieve the search string and convert to lowercase, escaping quotes
+    let searchString = document.getElementById("searchbar").value
+	.toLowerCase()
+	.replace(/"/g, "&quot;")
+	.replace(/'/g, "&apos;");
+
+    // Get HTML representations of special characters.
+    // We can do a bit of a hack here to save a lot of effort, and make the browser do it for us.
+    // If we load the search string into innerText of an element, then read it back as innerHTML,
+    // we get the HTML representations.
+    let converter = document.createElement("div");
+    converter.innerText = converter.textContent = searchString;
+    searchString = converter.innerHTML;
+    converter.remove();
+
+    // The previous step screws with our already converted quotes, fix them here.
+    // (We can't just not escape them before that step or it could wreak havoc on the page).
+    searchString = searchString
+	.replace(/&amp;quot;/g, "&quot;")
+	.replace(/&amp;apos;/g, "&apos;");
+    
+    alert(searchString);
+    return;
+}
