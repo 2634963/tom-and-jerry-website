@@ -77,7 +77,30 @@ function search()
     searchString = searchString
 	.replace(/&amp;quot;/g, "&quot;")
 	.replace(/&amp;apos;/g, "&apos;");
-    
-    alert(searchString);
+
+    // Load in the inner HTML elements of the body
+    let bodyHTML = document.querySelector("body");
+    let htmlString = bodyHTML.innerHTML;
+
+    // Delete any instances of <mark>...</mark> (clear the previous search)
+    htmlString = htmlString.replace(/<mark>/g, "").replace(/<\/mark>/g, "");
+
+    // If search string is empty, finish here
+    if(searchString.length == 0)
+    {
+	bodyHTML.innerHTML = htmlString;
+	return;
+    }
+
+    // Loop through the entire body HTML, looking for matches and handling any we find
+    for(let i = 0; i + searchString.length < htmlString.length; i++)
+    {
+	if(htmlString.slice(i, i + searchString.length).toLowerCase() == searchString)
+	{
+	    // We found a match for the search, now make sure it's not inside a tag
+	}
+    }
+
+    bodyHTML.innerHTML = htmlString;
     return;
 }
